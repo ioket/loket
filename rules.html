@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>welcome to loket :)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Space Mono', monospace;
+        }
+        .container {
+            width: 80%;
+            max-width: 650px;
+            color: #e9638b;
+            font-size: 18px;
+            line-height: 1.2; 
+        }
+        #text-display p {
+            margin: 0 0 0.6em 0; /
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="text-display"></div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const textDisplay = document.getElementById('text-display');
+            
+            const messages = [
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "Nullam auctor, nisl eget ultricies tincidunt.",
+                "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
+            ];
+            
+            let messageIndex = 0;
+            let charIndex = 0;
+            let currentParagraph = null;
+            
+            function type() {
+                if (messageIndex < messages.length) {
+                    const currentMessage = messages[messageIndex];
+                    
+                    if (charIndex === 0) {
+                        currentParagraph = document.createElement('p');
+                        textDisplay.appendChild(currentParagraph);
+                    }
+                    
+                    if (charIndex < currentMessage.length) {
+                        currentParagraph.textContent += currentMessage.charAt(charIndex);
+                        charIndex++;
+                        setTimeout(type, 40);
+                    } else {
+                        messageIndex++;
+                        charIndex = 0;
+                        setTimeout(type, 400);
+                    }
+                }
+            }
+            
+            type();
+        });
+    </script>
+</body>
+</html>
